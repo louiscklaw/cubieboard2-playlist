@@ -3,10 +3,20 @@
 # https://docs.travis-ci.com/user/job-lifecycle/
 
 # You can import up to 25 other configs in total.
+os: linux
 
 language: node_js
+
 node_js:
   - 12
 
+cache:
+  - npm
+  - pip
+
+import:
+  - credentials.yml
+
 script:
-  - echo "hellworld"
+  - wget https://raw.githubusercontent.com/louiscklaw/travis-playlist/master/travis-build-merger/merge_if_success.sh
+  - bash merge_if_success.sh | tee merge.log
